@@ -1,0 +1,237 @@
+body {
+  font-family: arial;
+  margin: 0;
+}
+
+.App {
+  text-align: center;
+  background: linear-gradient(270deg, rgb(155, 255, 196), rgb(136, 215, 246));
+}
+
+.App-header {
+  color: #333;
+  /* min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white; */
+}
+
+.language_selection_label > select {
+  position: absolute;
+  top: 50px;
+  left: 50px;
+  background: linear-gradient(270deg, rgb(253, 255, 160), rgb(155, 255, 196));
+  width: 120px;
+  height: 40px;
+  text-align: left;
+  border: 1px solid rgb(173, 173, 173);
+  padding: 20px;
+  font-size: 20px;
+}
+.language_selection_submit {
+  position: absolute;
+  top: 50px;
+  left: 170px;
+  background: linear-gradient(270deg, rgb(253, 255, 160), rgb(155, 255, 196));
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  border: 1px solid rgb(173, 173, 173);
+  border-radius: 5px;
+  font-size: 18px;
+}
+.orTerms_selection_label > select {
+  position: absolute;
+  top: 50px;
+  left: 220px;
+  background: linear-gradient(270deg, rgb(253, 255, 160), rgb(155, 255, 196));
+  width: 120px;
+  height: 40px;
+  text-align: left;
+  border: 1px solid rgb(173, 173, 173);
+  padding: 20px;
+  font-size: 20px;
+}
+.orTerms_selection_submit {
+  position: absolute;
+  top: 50px;
+  left: 340px;
+  background: linear-gradient(270deg, rgb(253, 255, 160), rgb(155, 255, 196));
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  border: 1px solid rgb(173, 173, 173);
+  border-radius: 5px;
+  font-size: 18px;
+}
+
+.orTerms_selection > select {
+  position: absolute;
+  top: 50px;
+  left: 230px;
+  background: linear-gradient(270deg, rgb(253, 255, 160), rgb(155, 255, 196));
+  width: 150px;
+  height: 40px;
+  text-align: left;
+  border: 1px solid rgb(173, 173, 173);
+  padding: 20px;
+  font-size: 20px;
+}
+
+.speechRecognition-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+.speechRecognition-container-name {
+  float: left;
+  font-size: 50px;
+  margin: 42px 0 10px 0;
+  width : 380px;
+  height : 50px;
+  font-weight: bolder;
+}
+.speechRecognition-container-name > div > #interim {
+  position: absolute;
+  top: 17px;
+  left: 480px;
+  font-size: 50px;
+  color: rgb(170, 170, 170);
+  margin: 0.5em 0 0.5em 0;
+  width : 380px;
+  height : 100px;
+}
+.speechRecognition-container-name > div > #final {
+  position: absolute;
+  top: 17px;
+  left: 480px;
+  font-size: 50px;
+  color: #333;
+  margin: 0.5em 0 0.5em 0;
+  width : 380px;
+  height : 100px;
+}
+.microphone-button {
+  float: left;
+  width: 70px;
+  height: 70px;
+  background: linear-gradient(225deg, rgb(253, 255, 160), rgb(155, 255, 196));
+  border-radius: 50%;
+  margin: 36px 0 0.5em 0.25em;
+  font-size: 40px;
+}
+.microphone-status {
+  color: rgb(76, 78, 252);
+  padding: 0.25em 0 0.5em 0;
+  width: 500px;
+}
+
+.searchBar_input > .input_text {
+  position: absolute;
+  top: 50px;
+  left: 1050px;
+  background: linear-gradient(270deg, rgb(253, 255, 160), rgb(155, 255, 196));
+  width: 260px;
+  height: 38px;
+  text-align: left;
+  border: 1px solid rgb(173, 173, 173);
+  border-radius: 5px;
+  padding: 0 16px 0 16px;
+  font-size: 20px;
+}
+.searchBar_input .input_text::placeholder {
+  display: inline-block;
+  text-align: center;
+  color: rgb(112, 112, 112);
+  font-size: 18px;
+}
+.searchBar_input > .input_submit {
+  position: absolute;
+  top: 50px;
+  left: 1350px;
+  background: linear-gradient(270deg, rgb(253, 255, 160), rgb(155, 255, 196));
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  border: 1px solid rgb(173, 173, 173);
+  border-radius: 5px;
+  font-size: 18px;
+}
+
+main {
+  color: #333;
+}
+
+.video-json {
+  font-size: 40px;
+  background: linear-gradient(270deg, rgb(155, 255, 196), rgb(136, 215, 246));
+  height: 710px;
+}
+.video-json-list-container {
+  align-items: center;
+  text-align: center;
+}
+.video-json-list-container > .thumbnail_container {
+  position: absolute;
+  top: 200px;
+  left: 50px;
+  width: 346px;
+  height: 580px;
+  overflow: scroll;
+}
+.video-json-list-container > .thumbnail_container > button {
+  background: linear-gradient(180deg, rgb(253, 255, 160), rgb(155, 255, 196));
+  border: 1px solid rgb(173, 173, 173);
+  padding: 7px 0 7px 0
+}
+.video-json-list-container > .thumbnail_container > button > .video-json-thumbnail-title {
+  text-align: left;
+  font-size: 20px;
+  padding: 7px
+}
+
+.video-json-list-container > div {
+  position: absolute;
+  top: 200px;
+  left: 430px;
+}
+.video-json-list-container > .pageNation {
+  position: absolute;
+  top: 740px;
+  left: 810px;
+  width: 300px;
+}
+.video-json-list-container > .pageNation > span > .prevBtn {
+  float: left;
+  width: 60px;
+  height: 30px;
+  font-size: 15px;
+  color: #333;
+  text-align: center;
+  margin-top: 22px;
+  background: linear-gradient(270deg, rgb(253, 255, 160), rgb(155, 255, 196));
+  cursor: pointer;
+}
+.video-json-list-container > .pageNation > span > .currentPage {
+  float: left;
+  color: black;
+  font-size: 20px;
+  text-align: center;
+  width: 100px;
+  padding-top: 26px;
+}
+.video-json-list-container > .pageNation > span > .nextBtn {
+  float: left;
+  width: 60px;
+  height: 30px;
+  font-size: 15px;
+  color: #333;
+  text-align: center;
+  margin-top: 22px;
+  background: linear-gradient(270deg, rgb(253, 255, 160), rgb(155, 255, 196));
+  cursor: pointer;
+}
