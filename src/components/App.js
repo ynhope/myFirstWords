@@ -334,7 +334,7 @@ class App extends Component {
                   </div>
                   : <div className='listening'>i'm listening...</div>
                   :
-                  this.state.query || this.state.result ? this.state.result : 'My First Words'
+                  this.state.query || this.state.result ? this.state.result : 'My First Words 👶'
                 }
               </div>
               <button className='microphone-button' onClick={this.toggleListen}>Search by Voice 🎙</button>
@@ -535,7 +535,33 @@ class App extends Component {
                   </div>
                 </div>
                 :
-                ''
+                <div className='tutorial'>
+                  <div className='thumbnail_container'>
+                    <div>You can search by</div>
+                    <li>Voices</li>
+                    <li>Texts</li>
+                    <br/>
+                    <div>And also</div>
+                    <div>you can choose</div>
+                    <li>Language</li>
+                    <li>orTerms</li>
+                    <br/>
+                    <div>orTerms are additional search terms to filter your result.</div>
+                  </div>
+
+                  <div className='main_container'>
+                    <div>Welcome to My First Words.</div>
+                    <br/>
+                    <div>This is the streaming services for Babies!!</div>
+                    <li>actually, to help hard-babysitting parents. 🙀😱</li>
+                    <br/>
+                    <div>After search, you can see related Youtube Videos.</div>
+                    <br/>
+                    <div>I hope you enjoy watching with your Baby. 👨‍👩‍👧</div>
+                    <br/>
+                    <div>🐣🐱🐯🦁🐨🐷🐰🐶🐼🐮🐵🐙🐢🐬🐳🦕✈️🚆🛥🚘🚌🚑</div>
+                  </div>
+                </div>
               }
             </div>
           </div>

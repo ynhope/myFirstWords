@@ -224,3 +224,31 @@ main {
   background: linear-gradient(270deg, rgb(253, 255, 160), rgb(155, 255, 196));
   cursor: pointer;
 }
+
+.tutorial > .thumbnail_container {
+  position: absolute;
+  top: 230px;
+  left: 50px;
+  background: linear-gradient(90deg, rgb(155, 255, 196), rgb(136, 215, 246));
+  width: 266px;
+  height: 450px;
+  text-align: left;
+  border-radius: 5px;
+  padding: 50px 40px 50px 40px;
+  font-size: 30px
+}
+.tutorial > .main_container {
+  position: absolute;
+  top: 230px;
+  left: 430px;
+  background: linear-gradient(90deg, rgb(155, 255, 196), rgb(136, 215, 246));
+  width: 860px;
+  height: 450px;
+  text-align: left;
+  border-radius: 5px;
+  padding: 50px;
+  font-size: 38px
+}
+.tutorial > .main_container > li {
+  margin-top: 10px;
+}
