@@ -1,20 +1,20 @@
-'use strict'
-const path = require('path');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
+"use strict"
+const path = require("path");
+const CopyWebpackPlugin = require("copy-webpack-plugin");
 
 module.exports = {
     entry: {
-        main: ['./src/index.js']
+        main: ["./src/index.js"]
     },
     output: {
-        path: path.resolve(__dirname, './build'),
-        filename: '[name].js'
+        path: path.resolve(__dirname, "./build"),
+        filename: "[name].js"
     },
     module: {
         rules: [{
             test: /\.js$/,
-            include: path.resolve(__dirname, './src'),
-            loaders: 'babel-loader'
+            include: path.resolve(__dirname, "./src"),
+            loaders: "babel-loader"
         }, {
             test: /\.css$/,
             loader: "style-loader!css-loader"
@@ -22,13 +22,13 @@ module.exports = {
     },
     plugins: [
         new CopyWebpackPlugin([{
-            context: './public',
-            from: '*.*'
+            context: "./public",
+            from: "*.*"
         }])
     ],
     devServer: {
-        contentBase: './public',
-        host: 'localhost',
+        contentBase: "./public",
+        host: "localhost",
         port: 3000
     }
 }
