@@ -28,11 +28,21 @@ class App extends Component {
       finalTranscriptRecog: '',
       imageUrlContainer: [],
       videoUrlContainer: [],
-      currentPage: 1
+      currentPage: 1,
+      language: 'en-US',
+      orTerms: 'cartoon',
+      placeholder: 'Search by Text'
     }
 
     this.toggleListen = this.toggleListen.bind(this)
     this.handleListen = this.handleListen.bind(this)
+
+    this.handleOrTermsChange = this.handleOrTermsChange.bind(this)
+    this.handleOrTermsSubmit = this.handleOrTermsSubmit.bind(this)
+
+    this.handleLanguageChange = this.handleLanguageChange.bind(this)
+    this.handleLanguageSubmit = this.handleLanguageSubmit.bind(this)
+
     this.handleSearch = this.handleSearch.bind(this)
     this.handleSearchSubmit = this.handleSearchSubmit.bind(this);
   }
@@ -104,7 +114,8 @@ class App extends Component {
             listening: !this.state.listening,
             currentPage: 1,
             interimTranscriptRecog: '',
-            finalTranscriptRecog: ''
+            finalTranscriptRecog: '',
+            placeholder: 'Try another Search by Text!!'
           })
           console.log("let's go? then check state", this.state.query, 'listening?', this.state.listening, 'currentPage?', this.state.currentPage)
         }
@@ -145,6 +156,34 @@ class App extends Component {
     }
   }
 
+  handleLanguageChange(event) {
+    this.setState({
+      language: event.target.value
+    });
+    console.log('handleLanguageChange?' + this.state.language)
+  }
+  handleLanguageSubmit(event) {
+    event.preventDefault();
+    // this.setState({
+    //   language: event.target.value
+    // });
+    console.log('handleLanguageSubmit?' + this.state.language)
+  }
+
+  handleOrTermsChange(event) {
+    this.setState({
+      orTerms: event.target.value
+    });
+    console.log('handleOrTermsChange?' + this.state.orTerms)
+  }
+  handleOrTermsSubmit(event) {
+    event.preventDefault();
+    // this.setState({
+    //   orTerms: event.target.value
+    // });
+    console.log('handleOrTermsSubmit?' + this.state.orTerms)
+  }
+
   handleSearch = (event) => {
     this.setState({
       search: event.target.value
@@ -153,9 +192,11 @@ class App extends Component {
   handleSearchSubmit = (event) => {
     this.setState({
       query: this.state.search,
+      result: this.state.search,
       currentPage: 1,
       interimTranscriptRecog: '',
-      finalTranscriptRecog: ''
+      finalTranscriptRecog: '',
+      placeholder: 'Search by Text'
     })
     event.preventDefault();
   }
@@ -241,13 +282,16 @@ class App extends Component {
     let query = prevState.query
     let prevQuery = this.state.query.replace(/(\s*)/g,'')
     let listening = prevState.listening
-    console.log('componentDidUpdate', query, listening,this.state.currentPage)
+    console.log('componentDidUpdate', query, listening, this.state.currentPage, this.state.language, prevState.language, this.state.orTerms, prevState.orTerms)
 
     const CSE_KEY = process.env.REACT_APP_API_KEY
 
+    const orTermsSelect = this.state.orTerms
+    // const orTermsSelect = prevState.orTerms
+
     // let tunnedImageRequset = 'https://www.googleapis.com/customsearch/v1?q=' + prevQuery + '&cx=005285766285205858251%3Age6j54qcp19&exactTerms=cute&excludeTerms=free%2C%20shopify%2C%20shirt%2C%20tattoo%2C%20reddit%2C%20pinterest%2C%20drawing%2C%20crazy&filter=1&hl=en&imgSize=huge&imgType=clipart&safe=high&searchType=image&key=' + CSE_KEY
 
-    let tunnedVideoRequset = 'https://www.googleapis.com/customsearch/v1?q=' + prevQuery + '&cx=005285766285205858251%3Age6j54qcp19&orTerms=cartoon&dateRestrict=m15&excludeTerms=kill%2C%20killed%2C%20horror%2C%20Gazoon%2C%20doll%2C%20gbm%2C%20toy%2C%20news%2C%20draw%2C%20diy%2C%20tutorial%2C%20remix%2C%20dead%2C%20die%2C%20threat%2C%20drown%2C%20war%2C%20hindi%2C%20manga%2C%20twitch%2C%20crazy%2C%20bangla%2C%20islamic%2C%20arabic%2C%20isthishowyougoviral%2C%20larva%2C%20parody%2C%20Kannan&filter=1&gl=us&hl=en&rights=cc_publicdomain%2C%20cc_noncommercial&safe=high&siteSearch=youtube.com&siteSearchFilter=i&key=' + CSE_KEY
+    let tunnedVideoRequset = 'https://www.googleapis.com/customsearch/v1?q=' + prevQuery + '&cx=005285766285205858251%3Age6j54qcp19&orTerms=' + orTermsSelect + '&dateRestrict=m15&excludeTerms=kill%2C%20killed%2C%20horror%2C%20Gazoon%2C%20doll%2C%20gbm%2C%20toy%2C%20news%2C%20draw%2C%20diy%2C%20tutorial%2C%20remix%2C%20dead%2C%20die%2C%20threat%2C%20drown%2C%20war%2C%20hindi%2C%20manga%2C%20twitch%2C%20crazy%2C%20bangla%2C%20islamic%2C%20arabic%2C%20isthishowyougoviral%2C%20larva%2C%20parody%2C%20Kannan&filter=1&gl=us&hl=en&rights=cc_publicdomain%2C%20cc_noncommercial&safe=high&siteSearch=youtube.com&siteSearchFilter=i&key=' + CSE_KEY
 
     if (!prevQuery) {
       return;
@@ -299,24 +343,24 @@ class App extends Component {
 
           <form className='language_selection' onSubmit={this.handleLanguageSubmit}>
             <label className='language_selection_label'>
-              <select name="language" value={this.state.language} onChange={this.handleLanguage}>
+              <select name="language" value={this.state.language} onChange={this.handleLanguageChange}>
                 <option value="en-US">English</option>
                 <option value="ko-KR">Korean</option>
               </select>
             </label>
-            <input className='language_selection_submit' type="submit" value="Go" />
+            {/* <input className='language_selection_submit' type="submit" value="Go" /> */}
           </form>
 
-          <form className='orTerms_selection' action='/' method='get' >
+          <form className='orTerms_selection' onSubmit={this.handleOrTermsSubmit}>
             <label className='orTerms_selection_label'>
-              <select name="orTerms">
-                <option value="">None</option>
+              <select name="orTerms" value={this.state.orTerms} onChange={this.handleOrTermsChange}>
                 <option value="cartoon">Cartoon</option>
+                <option value="">None</option>
                 <option value="baby">Baby</option>
                 <option value="lovely">Lovely</option>
               </select>
             </label>
-            <input className='orTerms_selection_submit' type="submit" value="Go" />
+            {/* <input className='orTerms_selection_submit' type="submit" value="Go" /> */}
           </form>
 
           <div className='searchBar'>
@@ -324,7 +368,7 @@ class App extends Component {
               <input className='input_text'
                 type='text'
                 value={this.state.search}
-                placeholder="Search by Text!!"
+                placeholder={this.state.placeholder}
                 onChange={this.handleSearch}
               />
               <input className='input_submit'
