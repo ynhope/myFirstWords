@@ -49,8 +49,6 @@ class App extends Component {
   }
 
   handleListen() {
-    console.log("listening?", this.state.listening)
-
     if (this.state.listening) {
       recognition.start()
       recognition.onend = () => {
@@ -83,7 +81,6 @@ class App extends Component {
         interimTranscriptRecog: interimTranscript.toString(),
         finalTranscriptRecog: finalTranscript.toString()
       })
-      console.log("interimTranscript?", this.state.interimTranscriptRecog, this.state.finalTranscriptRecog)
 
       document.getElementById("interim").innerHTML = interimTranscript
       document.getElementById("final").innerHTML = finalTranscript
@@ -93,7 +90,6 @@ class App extends Component {
       console.log("stopCmd", stopCmd)
 
       if (stopCmd[0] === "let's" && stopCmd[1] === "go") {
-
         recognition.stop()
         recognition.onend = () => {
           console.log("Stopped listening per command")
@@ -110,7 +106,6 @@ class App extends Component {
             finalTranscriptRecog: "",
             placeholder: "Try another Search by Text!!"
           })
-          console.log("let's go? then check state", this.state.query, "listening?", this.state.listening, "currentPage?", this.state.currentPage)
         }
       }
 
@@ -126,7 +121,6 @@ class App extends Component {
             query: "",
             listening: !this.state.listening
           })
-          console.log("try again? then check state", this.state.query, "listening?", this.state.listening)
         }
       }
     }
@@ -140,22 +134,18 @@ class App extends Component {
     this.setState({
       language: event.target.value
     });
-    console.log("handleLanguageChange?" + this.state.language)
   }
   handleLanguageSubmit(event) {
     event.preventDefault();
-    console.log("handleLanguageSubmit?" + this.state.language)
   }
 
   handleOrTermsChange(event) {
     this.setState({
       orTerms: event.target.value
     });
-    console.log("handleOrTermsChange?" + this.state.orTerms)
   }
   handleOrTermsSubmit(event) {
     event.preventDefault();
-    console.log("handleOrTermsSubmit?" + this.state.orTerms)
   }
 
   handleSearch = (event) => {
@@ -236,7 +226,6 @@ class App extends Component {
         currentPage: this.state.currentPage + 1
       });
     }
-    console.log("check state of currentPage when Increase", this.state.currentPage)
   }
 
   handleDecrease = () => {
@@ -249,19 +238,13 @@ class App extends Component {
         currentPage: this.state.currentPage - 1
       });
     }
-    console.log("check state of currentPage when decrease",this.state.currentPage)
   }
 
   componentDidUpdate(prevProps, prevState) {
-    let query = prevState.query
-    let prevQuery = this.state.query.replace(/(\s*)/g,"")
-    let listening = prevState.listening
-    console.log("componentDidUpdate", query, listening, this.state.currentPage, this.state.language, prevState.language, this.state.orTerms, prevState.orTerms)
-
+    const prevQuery = this.state.query.replace(/(\s*)/g,"")
     const CSE_KEY = process.env.REACT_APP_API_KEY
     const orTermsSelect = this.state.orTerms
-
-    let tunnedVideoRequset = "https://www.googleapis.com/customsearch/v1?q=" + prevQuery + "&cx=005285766285205858251%3Age6j54qcp19&orTerms=" + orTermsSelect + "&dateRestrict=m15&excludeTerms=kill%2C%20killed%2C%20horror%2C%20Gazoon%2C%20doll%2C%20gbm%2C%20toy%2C%20news%2C%20draw%2C%20diy%2C%20tutorial%2C%20remix%2C%20dead%2C%20die%2C%20threat%2C%20drown%2C%20war%2C%20hindi%2C%20manga%2C%20twitch%2C%20crazy%2C%20bangla%2C%20islamic%2C%20arabic%2C%20isthishowyougoviral%2C%20larva%2C%20parody%2C%20Kannan&filter=1&gl=us&hl=en&rights=cc_publicdomain%2C%20cc_noncommercial&safe=high&siteSearch=youtube.com&siteSearchFilter=i&key=" + CSE_KEY
+    const tunnedVideoRequset = "https://www.googleapis.com/customsearch/v1?q=" + prevQuery + "&cx=005285766285205858251%3Age6j54qcp19&orTerms=" + orTermsSelect + "&dateRestrict=m15&excludeTerms=kill%2C%20killed%2C%20horror%2C%20Gazoon%2C%20doll%2C%20gbm%2C%20toy%2C%20news%2C%20draw%2C%20diy%2C%20tutorial%2C%20remix%2C%20dead%2C%20die%2C%20threat%2C%20drown%2C%20war%2C%20hindi%2C%20manga%2C%20twitch%2C%20crazy%2C%20bangla%2C%20islamic%2C%20arabic%2C%20isthishowyougoviral%2C%20larva%2C%20parody%2C%20Kannan&filter=1&gl=us&hl=en&rights=cc_publicdomain%2C%20cc_noncommercial&safe=high&siteSearch=youtube.com&siteSearchFilter=i&key=" + CSE_KEY
 
     if (!prevQuery) {
       return;
@@ -269,7 +252,6 @@ class App extends Component {
 
     axios.get(tunnedVideoRequset)
     .then(responseOfTunnedVideoRequset => {
-      console.log("video",responseOfTunnedVideoRequset.data.items, this.state.query)
       this.setState({
         videoUrlContainer: responseOfTunnedVideoRequset.data.items,
         query: "",
