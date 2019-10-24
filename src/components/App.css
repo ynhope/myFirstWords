@@ -37,18 +37,6 @@ body {
   padding: 20px;
   font-size: 15px;
 }
-.language_selection_submit {
-  position: absolute;
-  top: 100px;
-  left: 176px;
-  background: linear-gradient(270deg, rgb(253, 255, 160), rgb(155, 255, 196));
-  width: 40px;
-  height: 30px;
-  text-align: center;
-  border: 1px solid rgb(173, 173, 173);
-  border-radius: 5px;
-  font-size: 15px;
-}
 .orTerms_selection_label > select {
   position: absolute;
   top: 100px;
@@ -59,18 +47,6 @@ body {
   text-align: left;
   border: 1px solid rgb(173, 173, 173);
   padding: 20px;
-  font-size: 15px;
-}
-.orTerms_selection_submit {
-  position: absolute;
-  top: 100px;
-  left: 356px;
-  background: linear-gradient(270deg, rgb(253, 255, 160), rgb(155, 255, 196));
-  width: 40px;
-  height: 30px;
-  text-align: center;
-  border: 1px solid rgb(173, 173, 173);
-  border-radius: 5px;
   font-size: 15px;
 }
 
@@ -231,11 +207,17 @@ main {
   left: 50px;
   background: linear-gradient(90deg, rgb(155, 255, 196), rgb(136, 215, 246));
   width: 266px;
-  height: 450px;
+  height: 470px;
   text-align: left;
   border-radius: 5px;
-  padding: 50px 40px 50px 40px;
-  font-size: 30px
+  padding: 40px;
+  font-size: 23px
+}
+.tutorial > .thumbnail_container > .first {
+  margin: 6px 0 6px 0;
+}
+.tutorial > .thumbnail_container > .second {
+  margin: 6px 0 16px 0;
 }
 .tutorial > .main_container {
   position: absolute;

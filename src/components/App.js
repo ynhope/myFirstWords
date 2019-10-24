@@ -1,10 +1,5 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-// import { BrowserRouter as Router, Route } from 'react-router-dom'
-// import { Link } from 'react-router-dom'
-// import Speech from './Speech'
-// import ImageViewer from './ImageViewer'
-// import VideoViewer from './VideoViewer'
 import ReactPlayer from 'react-player'
 import './App.css'
 
@@ -20,7 +15,6 @@ class App extends Component {
 
     this.state = {
       listening: false,
-      toggleListen_onClick: 0,
       query: '',
       search: '',
       result: '',
@@ -50,13 +44,12 @@ class App extends Component {
   toggleListen() {
     this.setState({
       listening: !this.state.listening,
-      toggleListen_onClick: this.state.toggleListen_onClick + 1,
       query: this.state.listening ? this.state.query : '',
     }, this.handleListen)
   }
 
   handleListen() {
-    console.log('listening?', this.state.listening, this.state.toggleListen_onClick)
+    console.log('listening?', this.state.listening)
 
     if (this.state.listening) {
       recognition.start()
@@ -136,19 +129,6 @@ class App extends Component {
           console.log("try again? then check state", this.state.query, 'listening?', this.state.listening)
         }
       }
-
-      // if (this.state.toggleListen_onClick % 2 === 0) {
-      //   recognition.stop()
-      //   recognition.onend = () => {
-      //     console.log('Stopped listening per click')
-
-      //     this.setState({
-      //       query: transcriptArr.toString(),
-      //       listening: !this.state.listening
-      //     })
-      //     console.log(this.state.query, 'listening?', this.state.listening)
-      //   }
-      // }
     }
 
     recognition.onerror = event => {
@@ -164,9 +144,6 @@ class App extends Component {
   }
   handleLanguageSubmit(event) {
     event.preventDefault();
-    // this.setState({
-    //   language: event.target.value
-    // });
     console.log('handleLanguageSubmit?' + this.state.language)
   }
 
@@ -178,9 +155,6 @@ class App extends Component {
   }
   handleOrTermsSubmit(event) {
     event.preventDefault();
-    // this.setState({
-    //   orTerms: event.target.value
-    // });
     console.log('handleOrTermsSubmit?' + this.state.orTerms)
   }
 
@@ -285,27 +259,13 @@ class App extends Component {
     console.log('componentDidUpdate', query, listening, this.state.currentPage, this.state.language, prevState.language, this.state.orTerms, prevState.orTerms)
 
     const CSE_KEY = process.env.REACT_APP_API_KEY
-
     const orTermsSelect = this.state.orTerms
-    // const orTermsSelect = prevState.orTerms
-
-    // let tunnedImageRequset = 'https://www.googleapis.com/customsearch/v1?q=' + prevQuery + '&cx=005285766285205858251%3Age6j54qcp19&exactTerms=cute&excludeTerms=free%2C%20shopify%2C%20shirt%2C%20tattoo%2C%20reddit%2C%20pinterest%2C%20drawing%2C%20crazy&filter=1&hl=en&imgSize=huge&imgType=clipart&safe=high&searchType=image&key=' + CSE_KEY
 
     let tunnedVideoRequset = 'https://www.googleapis.com/customsearch/v1?q=' + prevQuery + '&cx=005285766285205858251%3Age6j54qcp19&orTerms=' + orTermsSelect + '&dateRestrict=m15&excludeTerms=kill%2C%20killed%2C%20horror%2C%20Gazoon%2C%20doll%2C%20gbm%2C%20toy%2C%20news%2C%20draw%2C%20diy%2C%20tutorial%2C%20remix%2C%20dead%2C%20die%2C%20threat%2C%20drown%2C%20war%2C%20hindi%2C%20manga%2C%20twitch%2C%20crazy%2C%20bangla%2C%20islamic%2C%20arabic%2C%20isthishowyougoviral%2C%20larva%2C%20parody%2C%20Kannan&filter=1&gl=us&hl=en&rights=cc_publicdomain%2C%20cc_noncommercial&safe=high&siteSearch=youtube.com&siteSearchFilter=i&key=' + CSE_KEY
 
     if (!prevQuery) {
       return;
     }
-
-    // axios.get(tunnedImageRequset)
-    // .then(responseOfTunnedImageRequset => {
-    //   console.log('image',responseOfTunnedImageRequset.data.items)
-    //   this.setState({
-    //     imageUrlContainer: responseOfTunnedImageRequset.data.items,
-    //     query: '',
-    //     result: resultQuery
-    //   })
-    // })
 
     axios.get(tunnedVideoRequset)
     .then(responseOfTunnedVideoRequset => {
@@ -348,7 +308,6 @@ class App extends Component {
                 <option value="ko-KR">Korean</option>
               </select>
             </label>
-            {/* <input className='language_selection_submit' type="submit" value="Go" /> */}
           </form>
 
           <form className='orTerms_selection' onSubmit={this.handleOrTermsSubmit}>
@@ -360,7 +319,6 @@ class App extends Component {
                 <option value="lovely">Lovely</option>
               </select>
             </label>
-            {/* <input className='orTerms_selection_submit' type="submit" value="Go" /> */}
           </form>
 
           <div className='searchBar'>
@@ -375,7 +333,6 @@ class App extends Component {
                 type="submit"
                 value="Go"
               />
-              {/* <div>{this.state.search}</div> */}
             </form>
           </div>
         </header>
@@ -537,15 +494,20 @@ class App extends Component {
                 :
                 <div className='tutorial'>
                   <div className='thumbnail_container'>
-                    <div>You can search by</div>
-                    <li>Voices</li>
-                    <li>Texts</li>
-                    <br/>
-                    <div>And also</div>
-                    <div>you can choose</div>
-                    <li>Language</li>
-                    <li>orTerms</li>
-                    <br/>
+                    <div>You can search Words by</div>
+                    <li className='first'>Voices</li>
+                    <li className='second'>Texts</li>
+
+                    <div>When using Voices</div>
+                    <div>To execute searching</div>
+                    <li className='first'>Say "Let's Go"</li>
+                    <div>To cancel searching</div>
+                    <li className='second'>Say "Try Again"</li>
+
+                    <div>And also you can choose</div>
+                    <li className='first'>Language</li>
+                    <li className='second'>orTerms</li>
+
                     <div>orTerms are additional search terms to filter your result.</div>
                   </div>
 
