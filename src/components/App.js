@@ -6,9 +6,7 @@ import axios from 'axios'
 // import ImageViewer from './ImageViewer'
 // import VideoViewer from './VideoViewer'
 import ReactPlayer from 'react-player'
-// import YouTube from 'react-youtube'
 import './App.css'
-// process.env.REACT_APP_API_KEY
 
 const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition
 const recognition = new SpeechRecognition()
@@ -26,6 +24,8 @@ class App extends Component {
       query: '',
       search: '',
       result: '',
+      interimTranscriptRecog: '',
+      finalTranscriptRecog: '',
       imageUrlContainer: [],
       videoUrlContainer: [],
       currentPage: 1
@@ -69,13 +69,18 @@ class App extends Component {
     recognition.onresult = event => {
       let interimTranscript = ''
 
-
       for (let i = event.resultIndex; i < event.results.length; i++) {
         const transcript = event.results[i][0].transcript
 
         if (event.results[i].isFinal) finalTranscript += transcript + ' '
         else interimTranscript += transcript
       }
+
+      this.setState({
+        interimTranscriptRecog: interimTranscript.toString(),
+        finalTranscriptRecog: finalTranscript.toString()
+      })
+      console.log('interimTranscript?', this.state.interimTranscriptRecog, this.state.finalTranscriptRecog)
 
       document.getElementById('interim').innerHTML = interimTranscript
       document.getElementById('final').innerHTML = finalTranscript
@@ -85,6 +90,7 @@ class App extends Component {
       console.log('stopCmd', stopCmd)
 
       if (stopCmd[0] === `let's` && stopCmd[1] === `go`) {
+
         recognition.stop()
         recognition.onend = () => {
           console.log('Stopped listening per command')
@@ -94,8 +100,11 @@ class App extends Component {
 
           this.setState({
             query: finalText.toString(),
+            result: finalText.toString(),
             listening: !this.state.listening,
-            currentPage: 1
+            currentPage: 1,
+            interimTranscriptRecog: '',
+            finalTranscriptRecog: ''
           })
           console.log("let's go? then check state", this.state.query, 'listening?', this.state.listening, 'currentPage?', this.state.currentPage)
         }
@@ -144,7 +153,9 @@ class App extends Component {
   handleSearchSubmit = (event) => {
     this.setState({
       query: this.state.search,
-      currentPage: 1
+      currentPage: 1,
+      interimTranscriptRecog: '',
+      finalTranscriptRecog: ''
     })
     event.preventDefault();
   }
@@ -229,7 +240,6 @@ class App extends Component {
   componentDidUpdate(prevProps, prevState) {
     let query = prevState.query
     let prevQuery = this.state.query.replace(/(\s*)/g,'')
-    let resultQuery = this.state.query.toString()
     let listening = prevState.listening
     console.log('componentDidUpdate', query, listening,this.state.currentPage)
 
@@ -259,173 +269,80 @@ class App extends Component {
       this.setState({
         videoUrlContainer: responseOfTunnedVideoRequset.data.items,
         query: '',
-        result: resultQuery
       })
     })
   }
 
   render() {
-    // const opts = {
-    //   width: '800',
-    //   height: '480',
-    //   playerVars: {
-    //     autoplay: 1
-    //   }
-    // }
-
     return (
       <div className='App'>
         <header className='App-header'>
-          <span>
-            <form className='language_selection' onSubmit={this.handleLanguageSubmit}>
-              <label className='language_selection_label'>
-                <select name="language" value={this.state.language} onChange={this.handleLanguage}>
-                  <option value="en-US">English</option>
-                  <option value="ko-KR">Korean</option>
-                </select>
-              </label>
-              <input className='language_selection_submit' type="submit" value="Go" />
-            </form>
-
-            <form className='orTerms_selection' action='/' method='get' >
-              <label className='orTerms_selection_label'>
-                <select name="orTerms">
-                  <option value="">None</option>
-                  <option value="cartoon">Cartoon</option>
-                  <option value="baby">Baby</option>
-                  <option value="lovely">Lovely</option>
-                </select>
-              </label>
-              <input className='orTerms_selection_submit' type="submit" value="Go" />
-            </form>
-
-            <div className='speechRecognition'>
-              <div className='speechRecognition-container'>
-                <span>
-                  <div className='speechRecognition-container-name'>
-                    {/* {
-                      this.state.listening
-                      ?
-                      !this.state.result? `I'm Listening!` : this.state.result
-                      :
-                      'My First Words'
-                    } */}
-                    {
-                      this.state.listening
-                      ?
-                      <div>
-                        <div id='interim'></div>
-                        <div id='final'></div>
-                      </div>
-                      :
-                      this.state.result ? this.state.result : 'My First Words'
-                    }
-                  </div> {/* 단어가 바뀌어야 하는데 삼항연산자로 한번 해보자 */}
-                  <button className='microphone-button' onClick={this.toggleListen}>🎙</button>
-                  {/* <div id='interim'></div>
-                  <div id='final'></div> */}
-                </span>
-              </div>
-            </div>
-
-            <div className='searchBar'>
-              <form className='searchBar_input' onSubmit={this.handleSearchSubmit}>
-                <input className='input_text'
-                  type='text'
-                  value={this.state.search}
-                  placeholder="Search by Text!!"
-                  onChange={this.handleSearch}
-                />
-                <input className='input_submit'
-                  type="submit"
-                  value="Go"
-                />
-                {/* <div>{this.state.search}</div> */}
-              </form>
-            </div>
-          </span>
-
-          {/* <div className='searchBar'>
-            <form className='form' action='/' method='get' >
-              <div className='answer'>
-                <label className='label'>My First Words
-                  <br/>
-                  <br/>
-                  <input type='text' name='query' placeholder="Enter Baby's First Words!! ie.Elephant" required />
-                </label>
-                <br/>
-                <br/>
-                <button className='search-button' type='submit'>Let's go!!</button>
-              </div>
-            </form>
-          </div> */}
-        </header>
-
-        <main>
-          {/* <div className='speechRecognition'>
+          <div className='speechRecognition'>
             <div className='speechRecognition-container'>
-              <span>
-              <div className='speechRecognition-container-name'>My First Words</div>
-              <button className='microphone-button' onClick={this.toggleListen}>🎙</button>
-              </span>
-              <div className='microphone-status'>
+              <div className='speechRecognition-container-name'>
                 {
                   this.state.listening
                   ?
-                  `I'm Listening!`
+                  this.state.interimTranscriptRecog || this.state.finalTranscriptRecog ?
+                  <div>
+                    <div id='interim'></div>
+                    <div id='final'></div>
+                  </div>
+                  : <div className='listening'>i'm listening...</div>
                   :
-                  "Not Listening now!\nIf you want to turn on mic press the button above."
+                  this.state.query || this.state.result ? this.state.result : 'My First Words'
                 }
               </div>
-              <br/>
-              <div id='interim'></div>
-              <div id='final'></div>
-              <div>query: {this.state.query}</div>
-              <div>result: {this.state.result}</div>
+              <button className='microphone-button' onClick={this.toggleListen}>Search by Voice 🎙</button>
             </div>
           </div>
 
-          <br/>
-          <br/>
-          <br/>
+          <form className='language_selection' onSubmit={this.handleLanguageSubmit}>
+            <label className='language_selection_label'>
+              <select name="language" value={this.state.language} onChange={this.handleLanguage}>
+                <option value="en-US">English</option>
+                <option value="ko-KR">Korean</option>
+              </select>
+            </label>
+            <input className='language_selection_submit' type="submit" value="Go" />
+          </form>
 
-          <div className='imageViewer'>
-            <div className='image-json'>Image-json
-              {
-                this.state.imageUrlContainer && this.state.imageUrlContainer.length
-                ?
-                this.state.imageUrlContainer.map((list, index) => {
-                  return (
-                    <div className='image-json-list-container' key={index}>
-                      <div>{index + 1}. {list.link}</div>
-                      <img src={list.link} width='300px' alt='image_url_by_cse'/>
-                    </div>
-                  )
-                })
-                :
-                'No?'
-              }
-            </div>
+          <form className='orTerms_selection' action='/' method='get' >
+            <label className='orTerms_selection_label'>
+              <select name="orTerms">
+                <option value="">None</option>
+                <option value="cartoon">Cartoon</option>
+                <option value="baby">Baby</option>
+                <option value="lovely">Lovely</option>
+              </select>
+            </label>
+            <input className='orTerms_selection_submit' type="submit" value="Go" />
+          </form>
+
+          <div className='searchBar'>
+            <form className='searchBar_input' onSubmit={this.handleSearchSubmit}>
+              <input className='input_text'
+                type='text'
+                value={this.state.search}
+                placeholder="Search by Text!!"
+                onChange={this.handleSearch}
+              />
+              <input className='input_submit'
+                type="submit"
+                value="Go"
+              />
+              {/* <div>{this.state.search}</div> */}
+            </form>
           </div>
+        </header>
 
-          <br/>
-          <br/>
-          <br/> */}
-
+        <main>
           <div className='videoViewer'>
             <div className='video-json'>
               {
                 this.state.videoUrlContainer.length
                 ?
-                <div className='video-json-list-container'>Videos
-                  {/* <div>{this.state.videoUrlContainer[this.state.currentPage - 1].link}</div>
-                  'https://www.youtube.com/watch?v=stcNMMIEYxU'
-
-                  <div>name: {this.state.videoUrlContainer[this.state.currentPage - 1].title}</div>
-                  'Baby Shark Song Challenge + More Nursery Rhymes & Kids Songs ...'
-
-                  <div>description: {this.state.videoUrlContainer[this.state.currentPage - 1].snippet}</div>
-                  'Baby Shark Song Challenge + More Nursery Rhymes & Kids Songs | Sharks Cartoon Baby Shark Cartoon For Children Channel ! Subscribe to SHARK FAMILY ...' */}
+                <div className='video-json-list-container'>
                   <div className='thumbnail_container'>
                     <button className='video-json-thumbnail' onClick={this.handleReactPlayer1}>
                       <img className='video-json-thumbnail'
@@ -556,42 +473,10 @@ class App extends Component {
                         10. {this.state.videoUrlContainer[9].title}
                       </div>
                     </button>
-
-                    {/* {
-                      this.state.videoUrlContainer.map((list, index) => {
-                        return (
-                          <button className='video-json-thumbnail' onClick={this.handleReactPlayer} key={index}>
-                            <img className='video-json-thumbnail'
-                              src={list.pagemap.cse_image[0].src}
-                              width='330px'
-                              height='186px'
-                              alt='thumbnail_image'
-                              key={index}
-                            />
-                          </button>
-                        )
-                      })
-                    } */}
-
-                    {/* {
-                      this.state.imageUrlContainer.map((list, index) => {
-                        return (
-                          // <button className='video-json-thumbnail' onClick={this.handleReactPlayer} key={index}>
-                            <img className='video-json-thumbnail'
-                              src={list.link}
-                              width='330px'
-                              alt='thumbnail_image'
-                              key={index}
-                            />
-                          // </button>
-                        )
-                      })
-                    } */}
                   </div>
 
                   <ReactPlayer
                     url={this.state.videoUrlContainer[this.state.currentPage - 1].link}
-                    // url='https://www.youtube.com/watch?v=stcNMMIEYxU'
                     playing
                     width='960px'
                     height='540px'
@@ -603,13 +488,7 @@ class App extends Component {
                       <div className='currentPage'>{this.state.currentPage} / {this.state.videoUrlContainer.length}</div>
                       <button className='nextBtn' onClick={this.handleIncrease}>Next</button>
                     </span>
-                    {/* <div>전체 동영상수: {this.state.videoUrlContainer.length}</div> */}
                   </div>
-
-                  {/* <YouTube
-                    videoId={this.state.videoUrlContainer[this.state.currentPage - 1].link.substr(this.state.videoUrlContainer[this.state.currentPage - 1].link.length - 11, 11)}
-                    opts={opts}
-                  /> */}
                 </div>
                 :
                 ''

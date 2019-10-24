@@ -1,6 +1,7 @@
 body {
   font-family: arial;
-  margin: 0;
+  background: linear-gradient(270deg, rgb(155, 255, 196), rgb(136, 215, 246));
+  height: 820px;
 }
 
 .App {
@@ -19,110 +20,112 @@ body {
   color: white; */
 }
 
+.microphone-button {
+  position: absolute;
+  /* top: 50px; */
+  top: 40px;
+  left: 50px;
+  width: 346px;
+  height: 50px;
+  background: linear-gradient(225deg, rgb(253, 255, 160), rgb(155, 255, 196));
+  border-radius: 5px;
+  text-align: center;
+  font-size: 30px;
+  font-weight: bold;
+}
 .language_selection_label > select {
   position: absolute;
-  top: 50px;
+  /* top: 50px; */
+  top: 100px;
   left: 50px;
   background: linear-gradient(270deg, rgb(253, 255, 160), rgb(155, 255, 196));
   width: 120px;
-  height: 40px;
+  height: 30px;
   text-align: left;
   border: 1px solid rgb(173, 173, 173);
   padding: 20px;
-  font-size: 20px;
+  font-size: 15px;
 }
 .language_selection_submit {
   position: absolute;
-  top: 50px;
-  left: 170px;
+  /* top: 50px; */
+  top: 100px;
+  left: 176px;
   background: linear-gradient(270deg, rgb(253, 255, 160), rgb(155, 255, 196));
   width: 40px;
-  height: 40px;
+  height: 30px;
   text-align: center;
   border: 1px solid rgb(173, 173, 173);
   border-radius: 5px;
-  font-size: 18px;
+  font-size: 15px;
 }
 .orTerms_selection_label > select {
   position: absolute;
-  top: 50px;
-  left: 220px;
+  /* top: 50px; */
+  top: 100px;
+  left: 230px;
   background: linear-gradient(270deg, rgb(253, 255, 160), rgb(155, 255, 196));
   width: 120px;
-  height: 40px;
+  height: 30px;
   text-align: left;
   border: 1px solid rgb(173, 173, 173);
   padding: 20px;
-  font-size: 20px;
+  font-size: 15px;
 }
 .orTerms_selection_submit {
   position: absolute;
-  top: 50px;
-  left: 340px;
+  /* top: 50px; */
+  top: 100px;
+  left: 356px;
   background: linear-gradient(270deg, rgb(253, 255, 160), rgb(155, 255, 196));
   width: 40px;
-  height: 40px;
+  height: 30px;
   text-align: center;
   border: 1px solid rgb(173, 173, 173);
   border-radius: 5px;
-  font-size: 18px;
+  font-size: 15px;
 }
 
-.orTerms_selection > select {
-  position: absolute;
-  top: 50px;
-  left: 230px;
-  background: linear-gradient(270deg, rgb(253, 255, 160), rgb(155, 255, 196));
-  width: 150px;
-  height: 40px;
-  text-align: left;
-  border: 1px solid rgb(173, 173, 173);
-  padding: 20px;
-  font-size: 20px;
-}
-
-.speechRecognition-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-}
 .speechRecognition-container-name {
-  float: left;
-  font-size: 50px;
-  margin: 42px 0 10px 0;
-  width : 380px;
-  height : 50px;
+  position: absolute;
+  top: 0px;
+  left: 430px;
+  width : 960px;
+  height : 200px;
+  font-size: 80px;
   font-weight: bolder;
+  color: #333;
+  line-height: 200px;
+}
+.listening {
+  width : 960px;
+  height : 200px;
+  font-size: 80px;
+  font-weight: bolder;
+  color: rgb(76, 78, 252);
+  line-height: 200px;
 }
 .speechRecognition-container-name > div > #interim {
   position: absolute;
-  top: 17px;
-  left: 480px;
-  font-size: 50px;
+  top: 0px;
+  left: 0px;
+  width : 960px;
+  height : 200px;
+  font-size: 80px;
+  font-weight: bolder;
   color: rgb(170, 170, 170);
-  margin: 0.5em 0 0.5em 0;
-  width : 380px;
-  height : 100px;
+  line-height: 200px;
 }
 .speechRecognition-container-name > div > #final {
   position: absolute;
-  top: 17px;
-  left: 480px;
-  font-size: 50px;
+  top: 0px;
+  left: 0px;
+  width : 960px;
+  height : 200px;
+  font-size: 80px;
+  font-weight: bolder;
   color: #333;
-  margin: 0.5em 0 0.5em 0;
-  width : 380px;
-  height : 100px;
-}
-.microphone-button {
-  float: left;
-  width: 70px;
-  height: 70px;
-  background: linear-gradient(225deg, rgb(253, 255, 160), rgb(155, 255, 196));
-  border-radius: 50%;
-  margin: 36px 0 0.5em 0.25em;
-  font-size: 40px;
+  line-height: 200px;
 }
 .microphone-status {
   color: rgb(76, 78, 252);
@@ -132,10 +135,12 @@ body {
 
 .searchBar_input > .input_text {
   position: absolute;
-  top: 50px;
-  left: 1050px;
+  /* top: 50px; */
+  /* left: 1050px; */
+  top: 140px;
+  left: 50px;
   background: linear-gradient(270deg, rgb(253, 255, 160), rgb(155, 255, 196));
-  width: 260px;
+  width: 266px;
   height: 38px;
   text-align: left;
   border: 1px solid rgb(173, 173, 173);
@@ -151,15 +156,17 @@ body {
 }
 .searchBar_input > .input_submit {
   position: absolute;
-  top: 50px;
-  left: 1350px;
+  /* top: 50px;
+  left: 1350px; */
+  top: 140px;
+  left: 356px;
   background: linear-gradient(270deg, rgb(253, 255, 160), rgb(155, 255, 196));
   width: 40px;
   height: 40px;
   text-align: center;
   border: 1px solid rgb(173, 173, 173);
   border-radius: 5px;
-  font-size: 18px;
+  font-size: 15px;
 }
 
 main {
@@ -168,8 +175,6 @@ main {
 
 .video-json {
   font-size: 40px;
-  background: linear-gradient(270deg, rgb(155, 255, 196), rgb(136, 215, 246));
-  height: 710px;
 }
 .video-json-list-container {
   align-items: center;
