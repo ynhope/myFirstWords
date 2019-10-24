@@ -553,13 +553,13 @@ class App extends Component {
                     <div>Welcome to My First Words.</div>
                     <br/>
                     <div>This is the streaming services for Babies!!</div>
-                    <li>actually, to help hard-babysitting parents. 🙀😱</li>
+                    <li>actually, to help hard-babysitting parents. <span role='img' aria-label="hard">🙀😱</span></li>
                     <br/>
                     <div>After search, you can see related Youtube Videos.</div>
                     <br/>
-                    <div>I hope you enjoy watching with your Baby. 👨‍👩‍👧</div>
+                    <div>I hope you enjoy watching with your Baby. <span role='img' aria-label="parent">👨‍👩‍👧</span></div>
                     <br/>
-                    <div>🐣🐱🐯🦁🐨🐷🐰🐶🐼🐮🐵🐙🐢🐬🐳🦕✈️🚆🛥🚘🚌🚑</div>
+                    <div><span role='img' aria-label="words">🐣🐱🐯🦁🐨🐷🐰🐶🐼🐮🐵🐙🐢🐬🐳🦕✈️🚆🛥🚘🚌🚑</span></div>
                   </div>
                 </div>
               }
