@@ -244,7 +244,7 @@ class App extends Component {
     const prevQuery = this.state.query.replace(/(\s*)/g,"")
     const CSE_KEY = process.env.REACT_APP_API_KEY
     const orTermsSelect = this.state.orTerms
-    const tunnedVideoRequset = "https://www.googleapis.com/customsearch/v1?q=" + prevQuery + "&cx=005285766285205858251%3Age6j54qcp19&orTerms=" + orTermsSelect + "&dateRestrict=m15&excludeTerms=kill%2C%20killed%2C%20horror%2C%20Gazoon%2C%20doll%2C%20gbm%2C%20toy%2C%20news%2C%20draw%2C%20diy%2C%20tutorial%2C%20remix%2C%20dead%2C%20die%2C%20threat%2C%20drown%2C%20war%2C%20hindi%2C%20manga%2C%20twitch%2C%20crazy%2C%20bangla%2C%20islamic%2C%20arabic%2C%20isthishowyougoviral%2C%20larva%2C%20parody%2C%20Kannan&filter=1&gl=us&hl=en&rights=cc_publicdomain%2C%20cc_noncommercial&safe=high&siteSearch=youtube.com&siteSearchFilter=i&key=" + CSE_KEY
+    const tunnedVideoRequset = "https://www.googleapis.com/customsearch/v1?q=" + prevQuery + "&cx=005285766285205858251%3Age6j54qcp19&orTerms=" + orTermsSelect + "&dateRestrict=m15&excludeTerms=kill%2C%20killed%2C%20horror%2C%20Gazoon%2C%20doll%2C%20gbm%2C%20toy%2C%20news%2C%20draw%2C%20diy%2C%20tutorial%2C%20remix%2C%20dead%2C%20die%2C%20threat%2C%20drown%2C%20war%2C%20hindi%2C%20manga%2C%20twitch%2C%20crazy%2C%20bangla%2C%20islamic%2C%20arabic%2C%20isthishowyougoviral%2C%20larva%2C%20parody%2C%20Kannan&filter=1&gl=kr&hl=ko&rights=cc_publicdomain%2C%20cc_noncommercial&safe=high&siteSearch=youtube.com&siteSearchFilter=i&key=" + CSE_KEY
 
     if (!prevQuery) {
       return;
