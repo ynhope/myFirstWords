@@ -31,14 +31,28 @@ class App extends Component {
     this.toggleListen = this.toggleListen.bind(this)
     this.handleListen = this.handleListen.bind(this)
 
-    this.handleOrTermsChange = this.handleOrTermsChange.bind(this)
-    this.handleOrTermsSubmit = this.handleOrTermsSubmit.bind(this)
-
     this.handleLanguageChange = this.handleLanguageChange.bind(this)
     this.handleLanguageSubmit = this.handleLanguageSubmit.bind(this)
 
+    this.handleOrTermsChange = this.handleOrTermsChange.bind(this)
+    this.handleOrTermsSubmit = this.handleOrTermsSubmit.bind(this)
+
     this.handleSearch = this.handleSearch.bind(this)
-    this.handleSearchSubmit = this.handleSearchSubmit.bind(this);
+    this.handleSearchSubmit = this.handleSearchSubmit.bind(this)
+
+    this.handleReactPlayer1 = this.handleReactPlayer1.bind(this)
+    this.handleReactPlayer2 = this.handleReactPlayer2.bind(this)
+    this.handleReactPlayer3 = this.handleReactPlayer3.bind(this)
+    this.handleReactPlayer4 = this.handleReactPlayer4.bind(this)
+    this.handleReactPlayer5 = this.handleReactPlayer5.bind(this)
+    this.handleReactPlayer6 = this.handleReactPlayer6.bind(this)
+    this.handleReactPlayer7 = this.handleReactPlayer7.bind(this)
+    this.handleReactPlayer8 = this.handleReactPlayer8.bind(this)
+    this.handleReactPlayer9 = this.handleReactPlayer9.bind(this)
+    this.handleReactPlayer10 = this.handleReactPlayer10.bind(this)
+
+    this.handleIncrease = this.handleIncrease.bind(this)
+    this.handleDecrease = this.handleDecrease.bind(this)
   }
 
   toggleListen() {
@@ -51,23 +65,23 @@ class App extends Component {
   handleListen() {
     if (this.state.listening) {
       recognition.start()
-      recognition.onend = () => {
+      recognition.onend = function() {
         console.log("...continue listening...")
         recognition.start()
       }
     } else {
       recognition.stop()
-      recognition.onend = () => {
+      recognition.onend = function() {
         console.log("Stopped listening per click")
       }
     }
 
-    recognition.onstart = () => {
+    recognition.onstart = function() {
       console.log("Listening!")
     }
 
     let finalTranscript = ""
-    recognition.onresult = event => {
+    recognition.onresult = function(event) {
       let interimTranscript = ""
 
       for (let i = event.resultIndex; i < event.results.length; i++) {
@@ -91,7 +105,7 @@ class App extends Component {
 
       if (stopCmd[0] === "let's" && stopCmd[1] === "go") {
         recognition.stop()
-        recognition.onend = () => {
+        recognition.onend = function() {
           console.log("Stopped listening per command")
 
           const finalText = transcriptArr.slice(0, -3).join(" ")
@@ -111,7 +125,7 @@ class App extends Component {
 
       if (stopCmd[0] === "try" && stopCmd[1] === "again") {
         recognition.stop()
-        recognition.onend = () => {
+        recognition.onend = function() {
           console.log("Stopped listening per command")
 
           const finalText = transcriptArr.slice(0, -3).join(" ")
@@ -125,7 +139,7 @@ class App extends Component {
       }
     }
 
-    recognition.onerror = event => {
+    recognition.onerror = function(event) {
       console.log("Error occurred in recognition: " + event.error)
     }
   }
@@ -148,12 +162,12 @@ class App extends Component {
     event.preventDefault();
   }
 
-  handleSearch = (event) => {
+  handleSearch(event) {
     this.setState({
       search: event.target.value
     })
   }
-  handleSearchSubmit = (event) => {
+  handleSearchSubmit(event) {
     this.setState({
       query: this.state.search,
       result: this.state.search,
@@ -165,58 +179,58 @@ class App extends Component {
     event.preventDefault();
   }
 
-  handleReactPlayer1 = () => {
+  handleReactPlayer1() {
     this.setState({
       currentPage: 1
     });
   }
-  handleReactPlayer2 = () => {
+  handleReactPlayer2() {
     this.setState({
       currentPage: 2
     });
   }
-  handleReactPlayer3 = () => {
+  handleReactPlayer3() {
     this.setState({
       currentPage: 3
     });
   }
-  handleReactPlayer4 = () => {
+  handleReactPlayer4() {
     this.setState({
       currentPage: 4
     });
   }
-  handleReactPlayer5 = () => {
+  handleReactPlayer5() {
     this.setState({
       currentPage: 5
     });
   }
-  handleReactPlayer6 = () => {
+  handleReactPlayer6() {
     this.setState({
       currentPage: 6
     });
   }
-  handleReactPlayer7 = () => {
+  handleReactPlayer7() {
     this.setState({
       currentPage: 7
     });
   }
-  handleReactPlayer8 = () => {
+  handleReactPlayer8() {
     this.setState({
       currentPage: 8
     });
   }
-  handleReactPlayer9 = () => {
+  handleReactPlayer9() {
     this.setState({
       currentPage: 9
     });
   }
-  handleReactPlayer10 = () => {
+  handleReactPlayer10() {
     this.setState({
       currentPage: 10
     });
   }
 
-  handleIncrease = () => {
+  handleIncrease() {
     if (this.state.currentPage === 10) {
       this.setState({
         currentPage: 10
@@ -228,7 +242,7 @@ class App extends Component {
     }
   }
 
-  handleDecrease = () => {
+  handleDecrease() {
     if (this.state.currentPage === 1) {
       this.setState({
         currentPage: 1
@@ -244,16 +258,16 @@ class App extends Component {
     const prevQuery = this.state.query.replace(/(\s*)/g,"")
     const CSE_KEY = process.env.REACT_APP_API_KEY
     const orTermsSelect = this.state.orTerms
-    const tunnedVideoRequset = "https://www.googleapis.com/customsearch/v1?q=" + prevQuery + "&cx=005285766285205858251%3Age6j54qcp19&orTerms=" + orTermsSelect + "&dateRestrict=m15&excludeTerms=kill%2C%20killed%2C%20horror%2C%20Gazoon%2C%20doll%2C%20gbm%2C%20toy%2C%20news%2C%20draw%2C%20diy%2C%20tutorial%2C%20remix%2C%20dead%2C%20die%2C%20threat%2C%20drown%2C%20war%2C%20hindi%2C%20manga%2C%20twitch%2C%20crazy%2C%20bangla%2C%20islamic%2C%20arabic%2C%20isthishowyougoviral%2C%20larva%2C%20parody%2C%20Kannan&filter=1&gl=kr&hl=ko&rights=cc_publicdomain%2C%20cc_noncommercial&safe=high&siteSearch=youtube.com&siteSearchFilter=i&key=" + CSE_KEY
+    const tunnedVideoRequest = "https://www.googleapis.com/customsearch/v1?q=" + prevQuery + "&cx=005285766285205858251%3Age6j54qcp19&orTerms=" + orTermsSelect + "&dateRestrict=m15&excludeTerms=kill%2C%20killed%2C%20horror%2C%20Gazoon%2C%20doll%2C%20gbm%2C%20toy%2C%20news%2C%20draw%2C%20diy%2C%20tutorial%2C%20remix%2C%20dead%2C%20die%2C%20threat%2C%20drown%2C%20war%2C%20hindi%2C%20manga%2C%20twitch%2C%20crazy%2C%20bangla%2C%20islamic%2C%20arabic%2C%20isthishowyougoviral%2C%20larva%2C%20parody%2C%20Kannan&filter=1&gl=us&hl=en&rights=cc_publicdomain%2C%20cc_noncommercial&safe=high&siteSearch=youtube.com&siteSearchFilter=i&key=" + CSE_KEY
 
     if (!prevQuery) {
       return;
     }
 
-    axios.get(tunnedVideoRequset)
-    .then(responseOfTunnedVideoRequset => {
+    axios.get(tunnedVideoRequest)
+    .then(function axiosGetThen(responseOfTunnedVideoRequest) {
       this.setState({
-        videoUrlContainer: responseOfTunnedVideoRequset.data.items,
+        videoUrlContainer: responseOfTunnedVideoRequest.data.items,
         query: "",
       })
     })
