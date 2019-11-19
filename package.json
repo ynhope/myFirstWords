@@ -1,5 +1,6 @@
 {
   "name": "my-first-words",
+  "homepage": "https://my-first-words-12e71.firebaseapp.com",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

@@ -31,28 +31,14 @@ class App extends Component {
     this.toggleListen = this.toggleListen.bind(this)
     this.handleListen = this.handleListen.bind(this)
 
-    this.handleLanguageChange = this.handleLanguageChange.bind(this)
-    this.handleLanguageSubmit = this.handleLanguageSubmit.bind(this)
-
     this.handleOrTermsChange = this.handleOrTermsChange.bind(this)
     this.handleOrTermsSubmit = this.handleOrTermsSubmit.bind(this)
 
+    this.handleLanguageChange = this.handleLanguageChange.bind(this)
+    this.handleLanguageSubmit = this.handleLanguageSubmit.bind(this)
+
     this.handleSearch = this.handleSearch.bind(this)
-    this.handleSearchSubmit = this.handleSearchSubmit.bind(this)
-
-    this.handleReactPlayer1 = this.handleReactPlayer1.bind(this)
-    this.handleReactPlayer2 = this.handleReactPlayer2.bind(this)
-    this.handleReactPlayer3 = this.handleReactPlayer3.bind(this)
-    this.handleReactPlayer4 = this.handleReactPlayer4.bind(this)
-    this.handleReactPlayer5 = this.handleReactPlayer5.bind(this)
-    this.handleReactPlayer6 = this.handleReactPlayer6.bind(this)
-    this.handleReactPlayer7 = this.handleReactPlayer7.bind(this)
-    this.handleReactPlayer8 = this.handleReactPlayer8.bind(this)
-    this.handleReactPlayer9 = this.handleReactPlayer9.bind(this)
-    this.handleReactPlayer10 = this.handleReactPlayer10.bind(this)
-
-    this.handleIncrease = this.handleIncrease.bind(this)
-    this.handleDecrease = this.handleDecrease.bind(this)
+    this.handleSearchSubmit = this.handleSearchSubmit.bind(this);
   }
 
   toggleListen() {
@@ -65,23 +51,23 @@ class App extends Component {
   handleListen() {
     if (this.state.listening) {
       recognition.start()
-      recognition.onend = function() {
+      recognition.onend = () => {
         console.log("...continue listening...")
         recognition.start()
       }
     } else {
       recognition.stop()
-      recognition.onend = function() {
+      recognition.onend = () => {
         console.log("Stopped listening per click")
       }
     }
 
-    recognition.onstart = function() {
+    recognition.onstart = () => {
       console.log("Listening!")
     }
 
     let finalTranscript = ""
-    recognition.onresult = function(event) {
+    recognition.onresult = event => {
       let interimTranscript = ""
 
       for (let i = event.resultIndex; i < event.results.length; i++) {
@@ -105,7 +91,7 @@ class App extends Component {
 
       if (stopCmd[0] === "let's" && stopCmd[1] === "go") {
         recognition.stop()
-        recognition.onend = function() {
+        recognition.onend = () => {
           console.log("Stopped listening per command")
 
           const finalText = transcriptArr.slice(0, -3).join(" ")
@@ -125,7 +111,7 @@ class App extends Component {
 
       if (stopCmd[0] === "try" && stopCmd[1] === "again") {
         recognition.stop()
-        recognition.onend = function() {
+        recognition.onend = () => {
           console.log("Stopped listening per command")
 
           const finalText = transcriptArr.slice(0, -3).join(" ")
@@ -139,7 +125,7 @@ class App extends Component {
       }
     }
 
-    recognition.onerror = function(event) {
+    recognition.onerror = event => {
       console.log("Error occurred in recognition: " + event.error)
     }
   }
@@ -162,12 +148,12 @@ class App extends Component {
     event.preventDefault();
   }
 
-  handleSearch(event) {
+  handleSearch = (event) => {
     this.setState({
       search: event.target.value
     })
   }
-  handleSearchSubmit(event) {
+  handleSearchSubmit = (event) => {
     this.setState({
       query: this.state.search,
       result: this.state.search,
@@ -179,58 +165,58 @@ class App extends Component {
     event.preventDefault();
   }
 
-  handleReactPlayer1() {
+  handleReactPlayer1 = () => {
     this.setState({
       currentPage: 1
     });
   }
-  handleReactPlayer2() {
+  handleReactPlayer2 = () => {
     this.setState({
       currentPage: 2
     });
   }
-  handleReactPlayer3() {
+  handleReactPlayer3 = () => {
     this.setState({
       currentPage: 3
     });
   }
-  handleReactPlayer4() {
+  handleReactPlayer4 = () => {
     this.setState({
       currentPage: 4
     });
   }
-  handleReactPlayer5() {
+  handleReactPlayer5 = () => {
     this.setState({
       currentPage: 5
     });
   }
-  handleReactPlayer6() {
+  handleReactPlayer6 = () => {
     this.setState({
       currentPage: 6
     });
   }
-  handleReactPlayer7() {
+  handleReactPlayer7 = () => {
     this.setState({
       currentPage: 7
     });
   }
-  handleReactPlayer8() {
+  handleReactPlayer8 = () => {
     this.setState({
       currentPage: 8
     });
   }
-  handleReactPlayer9() {
+  handleReactPlayer9 = () => {
     this.setState({
       currentPage: 9
     });
   }
-  handleReactPlayer10() {
+  handleReactPlayer10 = () => {
     this.setState({
       currentPage: 10
     });
   }
 
-  handleIncrease() {
+  handleIncrease = () => {
     if (this.state.currentPage === 10) {
       this.setState({
         currentPage: 10
@@ -242,7 +228,7 @@ class App extends Component {
     }
   }
 
-  handleDecrease() {
+  handleDecrease = () => {
     if (this.state.currentPage === 1) {
       this.setState({
         currentPage: 1
@@ -265,7 +251,7 @@ class App extends Component {
     }
 
     axios.get(tunnedVideoRequest)
-    .then(function axiosGetThen(responseOfTunnedVideoRequest) {
+    .then(responseOfTunnedVideoRequest => {
       this.setState({
         videoUrlContainer: responseOfTunnedVideoRequest.data.items,
         query: "",
@@ -475,6 +461,7 @@ class App extends Component {
                   <ReactPlayer
                     url={this.state.videoUrlContainer[this.state.currentPage - 1].link}
                     playing
+                    loop
                     width="960px"
                     height="540px"
                   />
