@@ -288,7 +288,7 @@ class App extends Component {
           </div>
 
           <form className="language_selection" onSubmit={this.handleLanguageSubmit}>
-            <label className="language_selection_label">
+            <label className="language_selection_label">Language
               <select name="language" value={this.state.language} onChange={this.handleLanguageChange}>
                 <option value="en-US">English</option>
                 <option value="ko-KR">Korean</option>
@@ -297,7 +297,7 @@ class App extends Component {
           </form>
 
           <form className="orTerms_selection" onSubmit={this.handleOrTermsSubmit}>
-            <label className="orTerms_selection_label">
+            <label className="orTerms_selection_label">orTerms
               <select name="orTerms" value={this.state.orTerms} onChange={this.handleOrTermsChange}>
                 <option value="cartoon">Cartoon</option>
                 <option value="baby">Baby</option>

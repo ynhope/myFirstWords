@@ -26,27 +26,55 @@ body {
   font-size: 30px;
   font-weight: bold;
 }
-.language_selection_label > select {
+.language_selection_label {
   position: absolute;
   top: 100px;
   left: 50px;
   background: linear-gradient(270deg, rgb(253, 255, 160), rgb(155, 255, 196));
-  width: 170px;
-  height: 30px;
+  width: 160px;
+  height: 28px;
   text-align: left;
+  line-height: 28px;
+  padding-left: 10px;
   border: 1px solid rgb(173, 173, 173);
+  border-radius: 5px;
+  font-size: 14px;
+}
+.language_selection_label > select {
+  position: absolute;
+  top: 0px;
+  left: 80px;
+  background: linear-gradient(270deg, rgb(253, 255, 160), rgb(155, 255, 196));
+  width: 90px;
+  height: 28px;
+  text-align: left;
+  border: none;
   padding-left: 10px;
   font-size: 14px;
 }
-.orTerms_selection_label > select {
+.orTerms_selection_label {
   position: absolute;
   top: 100px;
   left: 226px;
   background: linear-gradient(270deg, rgb(253, 255, 160), rgb(155, 255, 196));
-  width: 170px;
-  height: 30px;
+  width: 160px;
+  height: 28px;
   text-align: left;
+  line-height: 28px;
+  padding-left: 10px;
   border: 1px solid rgb(173, 173, 173);
+  border-radius: 5px;
+  font-size: 14px;
+}
+.orTerms_selection_label > select {
+  position: absolute;
+  top: 0px;
+  left: 80px;
+  background: linear-gradient(270deg, rgb(253, 255, 160), rgb(155, 255, 196));
+  width: 90px;
+  height: 28px;
+  text-align: left;
+  border: none;
   padding-left: 10px;
   font-size: 14px;
 }
