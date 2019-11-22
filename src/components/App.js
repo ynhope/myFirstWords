@@ -90,41 +90,96 @@ class App extends Component {
       document.getElementById("final").innerHTML = finalTranscript
 
       const transcriptArr = finalTranscript.split(" ")
-      const stopCmd = transcriptArr.slice(-3, -1)
-      console.log("stopCmd", stopCmd)
 
-      if (stopCmd[0] === "let's" && stopCmd[1] === "go") {
-        recognition.stop()
-        recognition.onend = () => {
-          console.log("Stopped listening per command")
+      if (this.state.language === "en-US") {
+        const stopCmd = transcriptArr.slice(-3, -1)
+        console.log("stopCmd", stopCmd)
 
-          const finalText = transcriptArr.slice(0, -3).join(" ")
-          document.getElementById("final").innerHTML = finalText
+        if (stopCmd[0] === "let's" && stopCmd[1] === "go") {
+          recognition.stop()
+          recognition.onend = () => {
+            console.log("Stopped listening per command")
 
-          this.setState({
-            query: finalText.toString(),
-            result: finalText.toString(),
-            listening: !this.state.listening,
-            currentPage: 1,
-            interimTranscriptRecog: "",
-            finalTranscriptRecog: "",
-            placeholder: "Try another Search by Text!!"
-          })
+            const finalText = transcriptArr.slice(0, -3).join(" ")
+            document.getElementById("final").innerHTML = finalText
+            console.log("finalText", finalText)
+
+            this.setState({
+              query: finalText.toString(),
+              result: finalText.toString(),
+              listening: !this.state.listening,
+              currentPage: 1,
+              interimTranscriptRecog: "",
+              finalTranscriptRecog: "",
+              placeholder: "Try another Search by Text!!"
+            })
+          }
+        }
+      } else if (this.state.language === "ko-KR") {
+        const stopCmd = transcriptArr.slice(-2, -1)
+        console.log("stopCmd", stopCmd)
+
+        if (stopCmd[0] === "검색해") {
+          recognition.stop()
+          recognition.onend = () => {
+            console.log("Stopped listening per command")
+
+            const finalText = transcriptArr.slice(0, -2).join(" ")
+            document.getElementById("final").innerHTML = finalText
+            console.log("finalText", finalText)
+
+            this.setState({
+              query: finalText.toString(),
+              result: finalText.toString(),
+              listening: !this.state.listening,
+              currentPage: 1,
+              interimTranscriptRecog: "",
+              finalTranscriptRecog: "",
+              placeholder: "Try another Search by Text!!"
+            })
+          }
         }
       }
 
-      if (stopCmd[0] === "try" && stopCmd[1] === "again") {
-        recognition.stop()
-        recognition.onend = () => {
-          console.log("Stopped listening per command")
+      if (this.state.language === "en-US") {
+        const stopCmd = transcriptArr.slice(-3, -1)
+        console.log("stopCmd", stopCmd)
 
-          const finalText = transcriptArr.slice(0, -3).join(" ")
-          document.getElementById("final").innerHTML = finalText
+        if (stopCmd[0] === "try" && stopCmd[1] === "again") {
+          recognition.stop()
+          recognition.onend = () => {
+            console.log("Stopped listening per command")
 
-          this.setState({
-            query: "",
-            listening: !this.state.listening
-          })
+            const finalText = transcriptArr.slice(0, -3).join(" ")
+            document.getElementById("final").innerHTML = finalText
+            console.log("finalText", finalText)
+
+            this.setState({
+              query: "",
+              listening: !this.state.listening,
+              finalTranscriptRecog: ""
+            })
+          }
+        }
+      } else if (this.state.language === "ko-KR") {
+        const stopCmd = transcriptArr.slice(-2, -1)
+        console.log("stopCmd", stopCmd)
+
+        if (stopCmd[0] === "다시") {
+          recognition.stop()
+          recognition.onend = () => {
+            console.log("Stopped listening per command")
+
+            const finalText = transcriptArr.slice(0, -2).join(" ")
+            document.getElementById("final").innerHTML = finalText
+            console.log("finalText", finalText)
+
+            this.setState({
+              query: "",
+              listening: !this.state.listening,
+              finalTranscriptRecog: ""
+            })
+          }
         }
       }
     }
