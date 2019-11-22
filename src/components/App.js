@@ -3,11 +3,18 @@ import axios from "axios"
 import ReactPlayer from "react-player"
 import "./App.css"
 
-const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition
-const recognition = new SpeechRecognition()
-recognition.continous = true
-recognition.interimResults = true
-recognition.lang = "en-US"
+const userAgent = window.navigator.userAgent;
+console.log("userAgent", userAgent)
+const isChrome_iOS = userAgent.indexOf('CriOS');
+console.log("isChrome_iOS", isChrome_iOS)
+
+// if (isChrome_iOS === -1) {
+  const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition
+  const recognition = new SpeechRecognition()
+  recognition.continous = true
+  recognition.interimResults = true
+  recognition.lang = "en-US"
+// } else ""
 
 class App extends Component {
   constructor(props) {
@@ -27,21 +34,9 @@ class App extends Component {
       orTerms: "cartoon",
       placeholder: "Search by Text"
     }
-
-    this.toggleListen = this.toggleListen.bind(this)
-    this.handleListen = this.handleListen.bind(this)
-
-    this.handleOrTermsChange = this.handleOrTermsChange.bind(this)
-    this.handleOrTermsSubmit = this.handleOrTermsSubmit.bind(this)
-
-    this.handleLanguageChange = this.handleLanguageChange.bind(this)
-    this.handleLanguageSubmit = this.handleLanguageSubmit.bind(this)
-
-    this.handleSearch = this.handleSearch.bind(this)
-    this.handleSearchSubmit = this.handleSearchSubmit.bind(this);
   }
 
-  toggleListen() {
+  toggleListen = () => {
     recognition.lang = this.state.language
     this.setState({
       listening: !this.state.listening,
@@ -49,7 +44,7 @@ class App extends Component {
     }, this.handleListen)
   }
 
-  handleListen() {
+  handleListen = () => {
     if (this.state.listening) {
       recognition.start()
       recognition.onend = () => {
@@ -189,21 +184,21 @@ class App extends Component {
     }
   }
 
-  handleLanguageChange(event) {
+  handleLanguageChange = (event) => {
     this.setState({
       language: event.target.value
     });
   }
-  handleLanguageSubmit(event) {
+  handleLanguageSubmit = (event) => {
     event.preventDefault();
   }
 
-  handleOrTermsChange(event) {
+  handleOrTermsChange = (event) => {
     this.setState({
       orTerms: event.target.value
     });
   }
-  handleOrTermsSubmit(event) {
+  handleOrTermsSubmit = (event) => {
     event.preventDefault();
   }
 
