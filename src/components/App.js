@@ -300,9 +300,9 @@ class App extends Component {
             <label className="orTerms_selection_label">
               <select name="orTerms" value={this.state.orTerms} onChange={this.handleOrTermsChange}>
                 <option value="cartoon">Cartoon</option>
-                <option value="">None</option>
                 <option value="baby">Baby</option>
                 <option value="lovely">Lovely</option>
+                <option value="">None</option>
               </select>
             </label>
           </form>
