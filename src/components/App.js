@@ -542,15 +542,17 @@ class App extends Component {
 
                     <div>When using Voices</div>
                     <div>To execute searching</div>
-                    <li className="first">Say "Let's Go"</li>
+                    <li className="first">Say in English "Let's Go"</li>
+                    <li className="second">or in Korean "보여 주세요"</li>
                     <div>To cancel searching</div>
-                    <li className="second">Say "Try Again"</li>
+                    <li className="first">Say in English "Try Again"</li>
+                    <li className="second">or in Korean "다시 다시"</li>
 
                     <div>And also you can choose</div>
                     <li className="first">Language</li>
                     <li className="second">orTerms</li>
 
-                    <div>orTerms are additional search terms to filter your result.</div>
+                    <div className="note">orTerms are additional search terms to filter your result.</div>
                   </div>
 
                   <div className="main_container">
