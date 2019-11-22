@@ -116,15 +116,15 @@ class App extends Component {
           }
         }
       } else if (this.state.language === "ko-KR") {
-        const stopCmd = transcriptArr.slice(-2, -1)
+        const stopCmd = transcriptArr.slice(-3, -1)
         console.log("stopCmd", stopCmd)
 
-        if (stopCmd[0] === "검색해") {
+        if (stopCmd[0] === "보여" && stopCmd[1] === "주세요") {
           recognition.stop()
           recognition.onend = () => {
             console.log("Stopped listening per command")
 
-            const finalText = transcriptArr.slice(0, -2).join(" ")
+            const finalText = transcriptArr.slice(0, -3).join(" ")
             document.getElementById("final").innerHTML = finalText
             console.log("finalText", finalText)
 
@@ -162,15 +162,15 @@ class App extends Component {
           }
         }
       } else if (this.state.language === "ko-KR") {
-        const stopCmd = transcriptArr.slice(-2, -1)
+        const stopCmd = transcriptArr.slice(-3, -1)
         console.log("stopCmd", stopCmd)
 
-        if (stopCmd[0] === "다시") {
+        if (stopCmd[0] === "다시" && stopCmd[1] === "다시") {
           recognition.stop()
           recognition.onend = () => {
             console.log("Stopped listening per command")
 
-            const finalText = transcriptArr.slice(0, -2).join(" ")
+            const finalText = transcriptArr.slice(0, -3).join(" ")
             document.getElementById("final").innerHTML = finalText
             console.log("finalText", finalText)
 
