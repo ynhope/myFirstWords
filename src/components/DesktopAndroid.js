@@ -9,7 +9,7 @@ recognition.continous = true
 recognition.interimResults = true
 recognition.lang = "en-US"
 
-class App extends Component {
+class DesktopAndroid extends Component {
   constructor(props) {
     super(props)
 
@@ -565,4 +565,4 @@ class App extends Component {
   }
 }
 
-export default App
+export default DesktopAndroid

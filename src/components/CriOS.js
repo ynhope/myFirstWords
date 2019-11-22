@@ -3,7 +3,7 @@ import axios from "axios"
 import ReactPlayer from "react-player"
 import "./App.css"
 
-class App extends Component {
+class CriOS extends Component {
   constructor(props) {
     super(props)
 
@@ -411,4 +411,4 @@ class App extends Component {
   }
 }
 
-export default App
+export default CriOS
