@@ -42,6 +42,7 @@ class App extends Component {
   }
 
   toggleListen() {
+    recognition.lang = this.state.language
     this.setState({
       listening: !this.state.listening,
       query: this.state.listening ? this.state.query : "",
@@ -60,6 +61,9 @@ class App extends Component {
       recognition.onend = () => {
         console.log("Stopped listening per click")
       }
+      this.setState({
+        finalTranscriptRecog: ""
+      })
     }
 
     recognition.onstart = () => {
