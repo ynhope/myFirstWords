@@ -13,11 +13,11 @@ class App extends Component {
     return (
       <div>
         {
-          isChrome_iOS !== -1
+          isChrome_iOS === -1
           ?
-          <CriOS/>
-          :
           <DesktopAndroid/>
+          :
+          <CriOS/>
         }
       </div>
     )

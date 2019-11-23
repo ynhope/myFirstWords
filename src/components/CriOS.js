@@ -179,8 +179,9 @@ class CriOS extends Component {
           <form className="language_selection" onSubmit={this.handleLanguageSubmit}>
             <label className="language_selection_label">Language
               <select name="language" value={this.state.language} onChange={this.handleLanguageChange}>
-                <option value="en-US">English</option>
-                <option value="ko-KR">Korean</option>
+              <option value="en-US">English 🇺🇸</option>
+                <option value="en-GB">English 🇬🇧</option>
+                <option value="ko-KR">Korean 🇰🇷</option>
               </select>
             </label>
           </form>
@@ -383,7 +384,7 @@ class CriOS extends Component {
                     <li className="second">or in Korean "다시 다시"</li>
 
                     <div>And also you can choose</div>
-                    <li className="first">Language</li>
+                    <li className="first"><span role="img" aria-label="words">Language 🇰🇷🇺🇸🇬🇧</span></li>
                     <li className="second">orTerms</li>
 
                     <div className="note">orTerms are additional search terms to filter your result.</div>
