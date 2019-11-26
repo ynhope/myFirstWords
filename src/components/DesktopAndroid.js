@@ -79,7 +79,7 @@ class DesktopAndroid extends Component {
 
       const transcriptArr = finalTranscript.split(" ")
 
-      if (this.state.language === "en-US") {
+      if (this.state.language === "en-US" || "en-GB") {
         const stopCmd = transcriptArr.slice(-3, -1)
         console.log("stopCmd", stopCmd)
 
