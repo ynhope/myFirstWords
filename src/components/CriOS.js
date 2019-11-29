@@ -193,6 +193,7 @@ class CriOS extends Component {
                 <option value="baby">Baby</option>
                 <option value="lovely">Lovely</option>
                 <option value="">None</option>
+                <option value="music">Music</option>
               </select>
             </label>
           </form>
