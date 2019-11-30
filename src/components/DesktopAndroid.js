@@ -61,6 +61,7 @@ class DesktopAndroid extends Component {
       console.log("Listening!")
     }
 
+    console.log("handleListen", this.state.language)
     let finalTranscript = ""
     recognition.onresult = event => {
       let interimTranscript = ""
@@ -106,7 +107,26 @@ class DesktopAndroid extends Component {
             })
           }
         }
-      } else if (this.state.language === "ko-KR") {
+
+        if (stopCmd[0] === "try" && stopCmd[1] === "again") {
+          recognition.stop()
+          recognition.onend = () => {
+            console.log("Stopped listening per command")
+
+            const finalText = transcriptArr.slice(0, -3).join(" ")
+            document.getElementById("final").innerHTML = finalText
+            console.log("finalText", finalText)
+
+            this.setState({
+              query: "",
+              listening: !this.state.listening,
+              finalTranscriptRecog: ""
+            })
+          }
+        }
+      }
+
+      if (this.state.language === "ko-KR") {
         const stopCmd = transcriptArr.slice(-3, -1)
         console.log("stopCmd", stopCmd)
 
@@ -130,31 +150,6 @@ class DesktopAndroid extends Component {
             })
           }
         }
-      }
-
-      if (this.state.language === "en-US") {
-        const stopCmd = transcriptArr.slice(-3, -1)
-        console.log("stopCmd", stopCmd)
-
-        if (stopCmd[0] === "try" && stopCmd[1] === "again") {
-          recognition.stop()
-          recognition.onend = () => {
-            console.log("Stopped listening per command")
-
-            const finalText = transcriptArr.slice(0, -3).join(" ")
-            document.getElementById("final").innerHTML = finalText
-            console.log("finalText", finalText)
-
-            this.setState({
-              query: "",
-              listening: !this.state.listening,
-              finalTranscriptRecog: ""
-            })
-          }
-        }
-      } else if (this.state.language === "ko-KR") {
-        const stopCmd = transcriptArr.slice(-3, -1)
-        console.log("stopCmd", stopCmd)
 
         if (stopCmd[0] === "다시" && stopCmd[1] === "다시") {
           recognition.stop()
